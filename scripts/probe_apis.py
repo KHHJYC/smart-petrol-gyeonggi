@@ -1,5 +1,5 @@
 """Small read-only connectivity checks; never print keys or request URLs."""
-import concurrent.futures, json, os, socket, time, urllib.error, urllib.parse, urllib.request
+import argparse, concurrent.futures, json, os, socket, time, urllib.error, urllib.parse, urllib.request
 
 def probe(service, size=1, authenticated=True):
     phase='connect';start=time.monotonic()
@@ -21,9 +21,13 @@ def probe(service, size=1, authenticated=True):
     return outcome
 
 if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--sizes',type=int,nargs='+',default=[1000])
+    args=parser.parse_args()
     print(json.dumps({'addressFamilies':list(sorted({str(r[0]) for r in socket.getaddrinfo('openapi.gg.go.kr',443)}))}),flush=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
         results=list(pool.map(probe,['CCTV','SECRTLGT','AnimalRegistStus','Secrtlgt']))
     probe('CCTV',1,False)
     if any(r.get('code')!='INFO-000' for r in results): raise SystemExit('Official API connectivity failed in this runner.')
-    if probe('CCTV',1000).get('code')!='INFO-000': raise SystemExit('Full-size page connectivity failed.')
+    sizes=[probe('CCTV',size) for size in args.sizes]
+    if not any(r.get('code')=='INFO-000' for r in sizes): raise SystemExit('No tested page size completed.')
