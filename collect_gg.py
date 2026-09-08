@@ -2,10 +2,11 @@
 import concurrent.futures, gzip, json, os, pathlib, threading, urllib.error, urllib.parse, urllib.request
 
 SERVICES = {'cctv': 'CCTV', 'lights': 'SECRTLGT', 'pets': 'AnimalRegistStus', 'lightingSummary': 'Secrtlgt'}
+PAGE_SIZE = 250  # Verified on GitHub runners; 1,000-row responses timed out there.
 
 def fetch_page(service, page, key, cancel=None):
     cancel = cancel or threading.Event()
-    query = urllib.parse.urlencode({'KEY': key, 'Type': 'json', 'pIndex': page, 'pSize': 1000})
+    query = urllib.parse.urlencode({'KEY': key, 'Type': 'json', 'pIndex': page, 'pSize': PAGE_SIZE})
     for attempt in range(3):
         if cancel.is_set(): raise RuntimeError('Collection cancelled')
         try:
@@ -35,7 +36,7 @@ def collect(service, key):
     print(f'{service}: requesting first page', flush=True)
     total, first = fetch_page(service, 1, key)
     batches = {1: first}
-    pages = (total + 999) // 1000
+    pages = (total + PAGE_SIZE - 1) // PAGE_SIZE
     print(f'{service}: first page received; {total} rows, {pages} pages', flush=True)
     cancel = threading.Event()
     pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
