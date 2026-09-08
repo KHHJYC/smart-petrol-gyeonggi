@@ -1,0 +1,22 @@
+name: Check official API connectivity
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check small official requests without exposing credentials
+        env:
+          GG_API_KEY: ${{ secrets.GG_API_KEY }}
+        run: python -u scripts/probe_apis.py
