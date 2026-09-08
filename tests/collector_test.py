@@ -1,11 +1,19 @@
 import importlib.util, pathlib, time, unittest
+import sys
 from unittest.mock import patch
 
 spec=importlib.util.spec_from_file_location('collector', pathlib.Path(__file__).parents[1]/'collect_gg.py')
 collector=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(collector)
+sys.path.insert(0,str(pathlib.Path(__file__).parents[1]/'scripts'))
+from check_data_quality import check_counts
 
 class CollectionFailureTests(unittest.TestCase):
+    def test_official_coordinate_loss_blocks_publication(self):
+        with self.assertRaisesRegex(RuntimeError,'Previous public map retained'):
+            check_counts('cctv',2606,80546)
+        check_counts('cctv',80546,80546)
+
     def test_complete_collection_preserves_the_partial_last_page(self):
         def fetch(service, page, key, cancel=None):
             return 5, list(range(5))[(page-1)*2:page*2]
