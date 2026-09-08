@@ -35,7 +35,7 @@ jobs:
       - run: python tests/collector_test.py
       - name: Collect complete official data snapshot
         if: github.event_name != 'workflow_dispatch' || inputs.refresh_data
-        timeout-minutes: 8
+        timeout-minutes: 15
         env:
           GG_API_KEY: ${{ secrets.GG_API_KEY }}
         run: python -u scripts/refresh_data.py
