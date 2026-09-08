@@ -32,11 +32,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm ci --no-audit --no-fund
+      - run: python tests/collector_test.py
       - name: Collect complete official data snapshot
         if: github.event_name != 'workflow_dispatch' || inputs.refresh_data
+        timeout-minutes: 8
         env:
           GG_API_KEY: ${{ secrets.GG_API_KEY }}
-        run: python scripts/refresh_data.py
+        run: python -u scripts/refresh_data.py
       - run: npm run check
       - run: npm run lint:app
       - run: npm test
