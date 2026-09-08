@@ -3,8 +3,8 @@ import pathlib,sys,zipfile,hashlib,json
 root=pathlib.Path(__file__).resolve().parents[1]
 out=pathlib.Path(sys.argv[1]).resolve() if len(sys.argv)>1 else root/'outputs'
 out.mkdir(parents=True,exist_ok=True)
-directories={'app','components','db','drizzle','hooks','lib','public','scripts','tests','html-preview','.github','.openai'}
-files={'package.json','package-lock.json','tsconfig.json','next.config.ts','vite.config.ts','drizzle.config.ts','wrangler.local.jsonc','components.json','.gitignore','.oxlintrc.json','.oxfmtrc.json','.dev.vars.example','README.md','VALIDATION.md','GITHUB_이전전_안내.md','조명자료_사실검증.md','collect_gg.py','build_site.py','로컬실행.cmd'}
+directories={'app','components','db','drizzle','hooks','lib','public','scripts','tests','html-preview','pages','.github','.openai'}
+files={'package.json','package-lock.json','tsconfig.json','next.config.ts','vite.config.ts','vite.pages.config.ts','drizzle.config.ts','wrangler.local.jsonc','components.json','.gitignore','.oxlintrc.json','.oxfmtrc.json','.dev.vars.example','README.md','VALIDATION.md','GITHUB_이전전_안내.md','조명자료_사실검증.md','collect_gg.py','build_site.py','로컬실행.cmd'}
 obsolete={'components/atlas-map.tsx','lib/cctv.ts','lib/cctv.test.mjs','public/data/cctv.json','public/data/summary.json'}
 secret_file=root/'.dev.vars'
 secrets=[]
