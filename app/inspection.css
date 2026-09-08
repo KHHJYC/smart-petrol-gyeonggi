@@ -1,0 +1,266 @@
+.gap-layer {
+  padding: 14px 0;
+  border-bottom: 1px solid #e6edf4;
+}
+.gap-layer > label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #61758f;
+  cursor: pointer;
+}
+.gap-layer > label > span:nth-child(2) {
+  flex: 1;
+}
+.gap-swatch {
+  width: 22px;
+  height: 13px;
+  background: linear-gradient(90deg, #ecd078, #e69e48, #d96a32);
+  border-radius: 4px;
+}
+.gap-layer > .text-button {
+  font-size: 12px;
+  margin: 8px 0 0 30px;
+}
+.gap-layer > p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #ab905a;
+  margin-top: 8px;
+}
+.gap-legend {
+  position: absolute;
+  left: 17px;
+  bottom: 75px;
+  z-index: 410;
+  width: 174px;
+  border: 1px solid #e7e9ed;
+  background: #fffffff2;
+  border-radius: 11px;
+  padding: 12px;
+  box-shadow: 0 3px 14px #25395614;
+  pointer-events: none;
+}
+.gap-legend > strong {
+  display: block;
+  font-size: 12px;
+  color: #6a6b65;
+  margin-bottom: 8px;
+}
+.gap-legend > span {
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ecd078, #e69e48, #d96a32);
+}
+.gap-legend > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+  color: #8a8e96;
+}
+.gap-legend small {
+  font-size: 10px;
+}
+.gap-legend p {
+  font-size: 10px;
+  color: #9a9da4;
+  line-height: 1.65;
+  margin-top: 7px;
+}
+.selected-gap {
+  padding: 13px;
+  background: linear-gradient(120deg, #fff8e9, #fff4e9);
+  border: 1px solid #f0e2c5;
+  border-radius: 11px;
+  margin-top: 14px;
+}
+.selected-gap h3 {
+  font-size: 30px;
+  color: #bf8037;
+  margin-top: 8px;
+  line-height: 1.3;
+}
+.selected-gap h3 small {
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: 5px;
+  color: #b7a48b;
+}
+.selected-gap p {
+  font-size: 12px;
+  color: #a28b69;
+  margin-top: 7px;
+  line-height: 1.8;
+}
+.selected-gap > small {
+  display: block;
+  font-size: 11px;
+  color: #b5a58e;
+  line-height: 1.8;
+  margin-top: 8px;
+}
+.candidate-list {
+  display: grid;
+  gap: 9px;
+  margin: 16px 0;
+}
+.candidate-list button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-radius: 12px;
+  text-align: left;
+}
+.candidate-list button:hover {
+  background: #fffaf0;
+  border-color: #e8d4b5;
+}
+.candidate-list button > span {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 11px;
+  color: #fff;
+  font-weight: 750;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.candidate-list button > div {
+  flex: 1;
+  min-width: 0;
+}
+.candidate-list strong {
+  font-size: 14px;
+  display: block;
+  color: #647691;
+}
+.candidate-list p {
+  font-size: 12px;
+  color: #8c9bb0;
+  margin-top: 4px;
+}
+.candidate-list small {
+  display: block;
+  font-size: 11px;
+  color: #a2adbc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.candidate-list button > svg {
+  color: #a5b2c5;
+}
+.grid-method {
+  padding: 15px;
+  border-radius: 11px;
+  background: #f6f8fc;
+  color: #7c8da5;
+  font-size: 13px;
+  margin-top: 18px;
+}
+.grid-method summary {
+  cursor: pointer;
+  color: #5b789f;
+}
+.grid-method p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin-top: 14px;
+}
+.facility-row strong,
+.facility-row > span > span {
+  font-size: 14px;
+}
+.guide-grid p,
+.guide-copy p,
+.guide-copy li {
+  font-size: 14px;
+}
+.facility-row small {
+  font-size: 12px;
+}
+.source-cards article > small {
+  font-size: 12px;
+}
+.source-cards p {
+  font-size: 12px;
+}
+.form-error {
+  white-space: pre-wrap;
+}
+@media (max-width: 740px) {
+  .gap-layer {
+    clear: both;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 11px 0;
+    margin: 0 0 8px;
+    border-top: 1px solid #edf1f6;
+    border-bottom: 0;
+    gap: 7px;
+  }
+  .gap-layer > label {
+    font-size: 13px;
+    gap: 8px;
+  }
+  .gap-layer > .text-button {
+    font-size: 12px;
+    margin: 0;
+  }
+  .gap-layer > p {
+    width: 100%;
+    margin: 0;
+    font-size: 11px;
+  }
+  .gap-legend {
+    width: 150px;
+    left: 12px;
+    bottom: 75px;
+    padding: 10px;
+  }
+  .gap-legend p {
+    font-size: 10px;
+  }
+  .candidate-list button {
+    gap: 10px;
+    padding: 12px;
+  }
+  .candidate-list strong {
+    font-size: 13px;
+  }
+  .candidate-list button > span {
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+  }
+  .selected-gap {
+    margin-top: 8px;
+  }
+  .facility-row strong,
+  .facility-row > span > span {
+    font-size: 14px;
+  }
+}
+
+.radius-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.radius-label strong {
+  color: #148a7c;
+}
+.eyebrow {
+  font-size: 12px;
+}

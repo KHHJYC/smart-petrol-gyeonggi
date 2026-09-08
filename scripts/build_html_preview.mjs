@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {gzipSync} from 'node:zlib';
+import {build} from 'esbuild';
+const root=path.resolve(import.meta.dirname,'..');
+const out=process.argv[2]?path.resolve(process.argv[2]):path.join(root,'outputs/html-preview');
+fs.mkdirSync(out,{recursive:true});
+const bundled=await build({absWorkingDir:root,entryPoints:['html-preview/entry.tsx'],bundle:true,write:false,format:'iife',minify:true,charset:'utf8',target:['chrome111','edge111'],platform:'browser',alias:{'@':root},define:{'process.env.NODE_ENV':'"production"'},loader:{'.css':'empty'},plugins:[{name:'html-preview-labels',setup(b){b.onLoad({filter:/petrol-app\.tsx$/},async(args)=>({loader:'tsx',contents:fs.readFileSync(args.path,'utf8').replaceAll('현재 계정','이 브라우저').replaceAll('계정에 보관','이 브라우저에 보관').replaceAll('계정의 기록','브라우저 임시 기록').replaceAll('최신 게시자료 불러오기','포함된 자료 다시 읽기').replaceAll('게시된 최신 자료','HTML에 포함된 자료')}));b.onLoad({filter:/lib[\\/]patrol\.ts$/},async(args)=>({loader:'ts',contents:fs.readFileSync(args.path,'utf8').replace('export function asset(path: string) {',`export function asset(path: string) { if(path==='')return '#';if(path==='images/proposal-art.jpg')return (window as any).__SMART_HTML_IMAGE__;`)}))}}]});
+const js=bundled.outputFiles[0].text;
+const data={};
+for(const name of ['manifest.json','inspection.json','lighting-summary.json','briefing.json'])data['data/'+name]=gzipSync(fs.readFileSync(path.join(root,'public/data',name))).toString('base64');
+for(const name of fs.readdirSync(path.join(root,'public/data/regions')))data['data/regions/'+name]=gzipSync(fs.readFileSync(path.join(root,'public/data/regions',name))).toString('base64');
+const image='data:image/jpeg;base64,'+fs.readFileSync(path.join(root,'public/images/proposal-art.jpg')).toString('base64');
+const cssDir=path.join(root,'dist/client/_next/static/css');
+const css=fs.readdirSync(cssDir).filter(n=>n.endsWith('.css')).map(n=>fs.readFileSync(path.join(cssDir,n),'utf8')).join('\n');
+const html=`<!doctype html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>스마트펫트롤 · HTML 미리보기</title><style>${css}</style><style>.html-mode{background:#eaf4ff;color:#23486e;padding:9px 20px;font:13px/1.6 'Malgun Gothic',sans-serif;border-bottom:1px solid #caddf1}.html-mode b{margin-right:10px}.html-mode span{display:inline-block;margin-right:12px}@media print{.html-mode{display:none}}</style></head><body><div class="html-mode"><b>HTML 미리보기</b><span>실제 공공데이터 포함 · 배경지도는 인터넷 필요</span><span>기록은 이 브라우저에만 임시 저장 · 서버 저장·API 자동 갱신 미연결</span></div><div id="root"><p style="padding:40px;font-family:sans-serif">스마트펫트롤을 준비하고 있습니다…</p></div><noscript>JavaScript를 사용할 수 있는 Chrome 또는 Edge에서 열어 주세요.</noscript><script>window.__SMART_HTML_DATA__=${JSON.stringify(data)};window.__SMART_HTML_IMAGE__=${JSON.stringify(image)};</script><script>${js.replaceAll('</script','<\\/script')}</script></body></html>`;
+const secretFile=path.join(root,'.dev.vars');
+if(fs.existsSync(secretFile)){for(const line of fs.readFileSync(secretFile,'utf8').split(/\r?\n/)){if(line.startsWith('GG_API_KEY=')){const key=line.split('=')[1].trim().replace(/^['"]|['"]$/g,'');if(key&&html.includes(key))throw Error('Secret in HTML; cancelled')}}}
+fs.writeFileSync(path.join(out,'index.html'),html);
+fs.writeFileSync(path.join(out,'읽어주세요.txt'),'압축을 먼저 풀고 index.html을 Chrome 또는 Edge로 여세요. Node.js 설치나 서버 실행이 필요하지 않습니다.\n\n지도·검색·시설 점검 후보·지역 통계·기록 양식을 확인할 수 있습니다. 배경지도와 외부 지도 링크에는 인터넷이 필요합니다. API 키는 포함되지 않습니다.\n\nHTML의 기록은 이 브라우저 임시 저장입니다. 파일 위치를 바꾸거나 브라우저 데이터를 지우면 기록이 이어지지 않을 수 있으므로 내려받기로 보관하세요. 계정별 서버 저장과 API 자동 갱신은 별도 최종 실행본에서 제공합니다. 이 파일만으로 실제 운영 배포를 대신하지 않습니다.\n','utf8');
+console.log(JSON.stringify({html:path.join(out,'index.html'),bytes:Buffer.byteLength(html),datasets:Object.keys(data).length,javascriptBytes:Buffer.byteLength(js),cssBytes:Buffer.byteLength(css)}));

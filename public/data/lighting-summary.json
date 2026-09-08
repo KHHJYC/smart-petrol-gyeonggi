@@ -1,0 +1,1151 @@
+{
+  "endpoint": "Secrtlgt",
+  "unit": "개소",
+  "checkedAt": "2026-09-08T09:39:46.395226+00:00",
+  "sourceRows": 27,
+  "bands": [
+    {
+      "field": "NTRM_ELECPWR_AMNT1",
+      "technology": "나트륨",
+      "wattage": "100~200W"
+    },
+    {
+      "field": "NTRM_ELECPWR_AMNT2",
+      "technology": "나트륨",
+      "wattage": "201~300W"
+    },
+    {
+      "field": "NTRM_ELECPWR_AMNT3",
+      "technology": "나트륨",
+      "wattage": "301~400W"
+    },
+    {
+      "field": "MTAL_ELECPWR_AMNT4",
+      "technology": "메탈",
+      "wattage": "0~99W"
+    },
+    {
+      "field": "MTAL_ELECPWR_AMNT1",
+      "technology": "메탈",
+      "wattage": "100~150W"
+    },
+    {
+      "field": "MTAL_ELECPWR_AMNT2",
+      "technology": "메탈",
+      "wattage": "151~300W"
+    },
+    {
+      "field": "MTAL_ELECPWR_AMNT3",
+      "technology": "메탈",
+      "wattage": "301~400W"
+    },
+    {
+      "field": "LED_ELECPWR_AMNT4",
+      "technology": "LED",
+      "wattage": "0~49W"
+    },
+    {
+      "field": "LED_ELECPWR_AMNT1",
+      "technology": "LED",
+      "wattage": "50~100W"
+    },
+    {
+      "field": "LED_ELECPWR_AMNT2",
+      "technology": "LED",
+      "wattage": "101~120W"
+    },
+    {
+      "field": "LED_ELECPWR_AMNT3",
+      "technology": "LED",
+      "wattage": "121~150W"
+    }
+  ],
+  "missingCities": [
+    "동두천시",
+    "오산시",
+    "파주시",
+    "화성시"
+  ],
+  "rows": [
+    {
+      "id": 12,
+      "city": "가평군",
+      "cityCode": "41820",
+      "division": null,
+      "date": "20260106",
+      "bins": [
+        7,
+        0,
+        0,
+        6185,
+        1,
+        0,
+        0,
+        49,
+        4389,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 7,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 6186,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 4438,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 10631,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 16,
+      "city": "고양시",
+      "cityCode": "41280",
+      "division": "보안등",
+      "date": "20160906",
+      "bins": [
+        3364,
+        0,
+        0,
+        null,
+        11019,
+        0,
+        0,
+        null,
+        66,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 3364,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 11019,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 66,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 14449,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 13,
+      "city": "과천시",
+      "cityCode": "41290",
+      "division": null,
+      "date": "20260121",
+      "bins": [
+        2,
+        121,
+        0,
+        3,
+        0,
+        0,
+        0,
+        3,
+        1446,
+        32,
+        345
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 123,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 3,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 1826,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 1952,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 8,
+      "city": "광명시",
+      "cityCode": "41210",
+      "division": null,
+      "date": "20250718",
+      "bins": [
+        0,
+        1809,
+        0,
+        0,
+        11,
+        0,
+        0,
+        0,
+        720,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 1809,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 11,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 720,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 2540,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 5,
+      "city": "광주시",
+      "cityCode": "41610",
+      "division": null,
+      "date": "20190930",
+      "bins": [
+        0,
+        0,
+        0,
+        null,
+        12892,
+        0,
+        0,
+        null,
+        423,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 12892,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 423,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 13315,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 10,
+      "city": "구리시",
+      "cityCode": "41310",
+      "division": null,
+      "date": "20251031",
+      "bins": [
+        0,
+        0,
+        36,
+        4,
+        0,
+        0,
+        0,
+        1030,
+        2296,
+        7,
+        8
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 36,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 4,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 3341,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 3381,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 9,
+      "city": "군포시",
+      "cityCode": "41410",
+      "division": null,
+      "date": "20250718",
+      "bins": [
+        0,
+        0,
+        0,
+        50,
+        0,
+        0,
+        0,
+        0,
+        2250,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 50,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 2250,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 2300,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 20,
+      "city": "김포시",
+      "cityCode": "41570",
+      "division": "보안등",
+      "date": "20160906",
+      "bins": [
+        0,
+        0,
+        0,
+        null,
+        3461,
+        4758,
+        1123,
+        null,
+        284,
+        142,
+        88
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 9342,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 514,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 9856,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 14,
+      "city": "남양주시",
+      "cityCode": "41360",
+      "division": null,
+      "date": "20260401",
+      "bins": [
+        2137,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        294,
+        12434,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 2137,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 12728,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 14865,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 6,
+      "city": "부천시",
+      "cityCode": "41190",
+      "division": null,
+      "date": "20250701",
+      "bins": [
+        299,
+        0,
+        0,
+        2839,
+        502,
+        0,
+        0,
+        3848,
+        7066,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 299,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 3341,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 10914,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 14554,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 15,
+      "city": "성남시",
+      "cityCode": "41130",
+      "division": "보안등",
+      "date": "20160906",
+      "bins": [
+        8053,
+        0,
+        0,
+        null,
+        6043,
+        0,
+        0,
+        null,
+        182,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 8053,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 6043,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 182,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 14278,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 26,
+      "city": "수원시",
+      "cityCode": "41110",
+      "division": null,
+      "date": null,
+      "bins": [
+        178,
+        0,
+        0,
+        3955,
+        911,
+        0,
+        0,
+        1041,
+        10911,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 178,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 4866,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 11952,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 16996,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 22,
+      "city": "시흥시",
+      "cityCode": "41390",
+      "division": null,
+      "date": null,
+      "bins": [
+        3178,
+        null,
+        null,
+        null,
+        2158,
+        0,
+        0,
+        10,
+        5300,
+        18,
+        13
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 3178,
+          "missing": 2
+        },
+        {
+          "name": "메탈",
+          "known": 2158,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 5341,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 10677,
+      "missing": 3,
+      "ambiguous": false
+    },
+    {
+      "id": 18,
+      "city": "안산시",
+      "cityCode": "41270",
+      "division": "보안등",
+      "date": "20160906",
+      "bins": [
+        3365,
+        3135,
+        0,
+        null,
+        1973,
+        420,
+        0,
+        null,
+        81,
+        774,
+        42
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 6500,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 2393,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 897,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 9790,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 7,
+      "city": "안성시",
+      "cityCode": "41550",
+      "division": null,
+      "date": null,
+      "bins": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        17868,
+        null,
+        null
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 0,
+          "missing": 3
+        },
+        {
+          "name": "메탈",
+          "known": 0,
+          "missing": 4
+        },
+        {
+          "name": "LED",
+          "known": 17868,
+          "missing": 3
+        }
+      ],
+      "knownTotal": 17868,
+      "missing": 10,
+      "ambiguous": false
+    },
+    {
+      "id": 3,
+      "city": "안양시",
+      "cityCode": "41170",
+      "division": null,
+      "date": "20250716",
+      "bins": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        6471,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 6471,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 6471,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 25,
+      "city": "양주시",
+      "cityCode": "41630",
+      "division": null,
+      "date": null,
+      "bins": [
+        11595,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        705,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 11595,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 705,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 12300,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 24,
+      "city": "양평군",
+      "cityCode": "41830",
+      "division": null,
+      "date": null,
+      "bins": [
+        177,
+        null,
+        null,
+        null,
+        2,
+        5,
+        null,
+        14603,
+        414,
+        4,
+        null
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 177,
+          "missing": 2
+        },
+        {
+          "name": "메탈",
+          "known": 7,
+          "missing": 2
+        },
+        {
+          "name": "LED",
+          "known": 15021,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 15205,
+      "missing": 5,
+      "ambiguous": false
+    },
+    {
+      "id": 4,
+      "city": "여주시",
+      "cityCode": "41670",
+      "division": null,
+      "date": null,
+      "bins": [
+        101,
+        62,
+        null,
+        null,
+        null,
+        20,
+        null,
+        null,
+        866,
+        null,
+        169
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 163,
+          "missing": 1
+        },
+        {
+          "name": "메탈",
+          "known": 20,
+          "missing": 3
+        },
+        {
+          "name": "LED",
+          "known": 1035,
+          "missing": 2
+        }
+      ],
+      "knownTotal": 1218,
+      "missing": 6,
+      "ambiguous": false
+    },
+    {
+      "id": 0,
+      "city": "연천군",
+      "cityCode": "41800",
+      "division": null,
+      "date": null,
+      "bins": [
+        null,
+        79,
+        null,
+        3024,
+        30,
+        null,
+        null,
+        null,
+        2386,
+        null,
+        null
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 79,
+          "missing": 2
+        },
+        {
+          "name": "메탈",
+          "known": 3054,
+          "missing": 2
+        },
+        {
+          "name": "LED",
+          "known": 2386,
+          "missing": 3
+        }
+      ],
+      "knownTotal": 5519,
+      "missing": 7,
+      "ambiguous": false
+    },
+    {
+      "id": 17,
+      "city": "용인시",
+      "cityCode": "41460",
+      "division": "보안등",
+      "date": "20160906",
+      "bins": [
+        2637,
+        3406,
+        0,
+        null,
+        11698,
+        0,
+        0,
+        null,
+        433,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 6043,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 11698,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 433,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 18174,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 19,
+      "city": "의왕시",
+      "cityCode": "41430",
+      "division": null,
+      "date": null,
+      "bins": [
+        1020,
+        0,
+        0,
+        null,
+        1056,
+        0,
+        0,
+        null,
+        80,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 1020,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 1056,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 80,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 2156,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 1,
+      "city": "의정부시",
+      "cityCode": "41150",
+      "division": null,
+      "date": null,
+      "bins": [
+        796,
+        0,
+        0,
+        null,
+        345,
+        0,
+        0,
+        null,
+        3819,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 796,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 345,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 3819,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 4960,
+      "missing": 2,
+      "ambiguous": false
+    },
+    {
+      "id": 11,
+      "city": "이천시",
+      "cityCode": "41500",
+      "division": null,
+      "date": "20260309",
+      "bins": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        14578,
+        0,
+        4347
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 18925,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 18925,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 2,
+      "city": "평택시",
+      "cityCode": "41220",
+      "division": null,
+      "date": "20250701",
+      "bins": [
+        1183,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        85,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 1183,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 0,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 85,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 1268,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 23,
+      "city": "포천시",
+      "cityCode": "41650",
+      "division": null,
+      "date": null,
+      "bins": [
+        26,
+        2359,
+        1,
+        0,
+        1,
+        4,
+        0,
+        666,
+        7594,
+        8,
+        1001
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 2386,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 5,
+          "missing": 0
+        },
+        {
+          "name": "LED",
+          "known": 9269,
+          "missing": 0
+        }
+      ],
+      "knownTotal": 11660,
+      "missing": 0,
+      "ambiguous": false
+    },
+    {
+      "id": 21,
+      "city": "하남시",
+      "cityCode": "41450",
+      "division": "보안등",
+      "date": "20160906",
+      "bins": [
+        1700,
+        0,
+        0,
+        null,
+        2653,
+        0,
+        0,
+        null,
+        20,
+        0,
+        0
+      ],
+      "groups": [
+        {
+          "name": "나트륨",
+          "known": 1700,
+          "missing": 0
+        },
+        {
+          "name": "메탈",
+          "known": 2653,
+          "missing": 1
+        },
+        {
+          "name": "LED",
+          "known": 20,
+          "missing": 1
+        }
+      ],
+      "knownTotal": 4373,
+      "missing": 2,
+      "ambiguous": false
+    }
+  ]
+}

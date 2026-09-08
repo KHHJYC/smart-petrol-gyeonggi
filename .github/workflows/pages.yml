@@ -1,0 +1,71 @@
+name: Publish Smart Petrol
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      refresh_data:
+        description: 'Collect the four APIs before publishing'
+        type: boolean
+        default: true
+  schedule:
+    - cron: '0 21 * * *' # 06:00 Asia/Seoul; scheduled runs may be delayed.
+permissions:
+  contents: read
+concurrency:
+  group: smart-petrol-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - name: Collect complete official data snapshot
+        if: github.event_name != 'workflow_dispatch' || inputs.refresh_data
+        env:
+          GG_API_KEY: ${{ secrets.GG_API_KEY }}
+        run: python scripts/refresh_data.py
+      - run: npm run check
+      - run: npm run lint:app
+      - run: npm test
+      - run: npm run build:pages
+      - run: npm run test:pages
+      - name: Scan the public artifact
+        env:
+          GG_API_KEY: ${{ secrets.GG_API_KEY }}
+        run: python scripts/check_public_artifact.py site-static
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validated-public-data
+          path: public/data/
+          retention-days: 7
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site-static
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy validated website
+        id: deployment
+        uses: actions/deploy-pages@v4

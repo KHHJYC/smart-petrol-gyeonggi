@@ -1,0 +1,953 @@
+{
+  "checkedAt": "2026-09-08T08:35:41.816682+00:00",
+  "mode": "api",
+  "schemaVersion": 2,
+  "sources": {
+    "cctv": {
+      "rows": 83072,
+      "mapped": 80546,
+      "dateMin": "20200101",
+      "dateMax": "20260728",
+      "endpoint": "CCTV"
+    },
+    "lights": {
+      "rows": 297198,
+      "mapped": 295672,
+      "dateMin": "20221220",
+      "dateMax": "20260625",
+      "endpoint": "SECRTLGT"
+    },
+    "pets": {
+      "rows": 2647,
+      "mapped": 0,
+      "dateMin": "20230630",
+      "dateMax": "20260520",
+      "endpoint": "AnimalRegistStus"
+    }
+  },
+  "cities": [
+    {
+      "name": "가평군",
+      "file": "0.json",
+      "center": [
+        37.8315,
+        127.5095
+      ],
+      "bounds": [
+        127.280808,
+        37.588474,
+        127.80715,
+        38.041634
+      ],
+      "cctv": 656,
+      "cctvMapped": 656,
+      "lights": 10634,
+      "lightsMapped": 10634,
+      "petRows": 49,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "latestPetYear": "2026"
+    },
+    {
+      "name": "고양시",
+      "file": "1.json",
+      "center": [
+        37.6584,
+        126.832
+      ],
+      "bounds": [
+        126.680647,
+        37.5813879,
+        126.9702358,
+        37.7472422
+      ],
+      "cctv": 2118,
+      "cctvMapped": 2118,
+      "lights": 14440,
+      "lightsMapped": 14414,
+      "petRows": 208,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "latestPetYear": "2023"
+    },
+    {
+      "name": "과천시",
+      "file": "2.json",
+      "center": [
+        37.4292,
+        126.9876
+      ],
+      "bounds": [
+        126.969896,
+        37.402189,
+        127.0354792,
+        37.46404
+      ],
+      "cctv": 824,
+      "cctvMapped": 824,
+      "lights": 1385,
+      "lightsMapped": 1385,
+      "petRows": 37,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "latestPetYear": "2023"
+    },
+    {
+      "name": "광명시",
+      "file": "3.json",
+      "center": [
+        37.4785,
+        126.8646
+      ],
+      "bounds": [
+        126.8262499,
+        37.0591,
+        128.86963,
+        37.499485
+      ],
+      "cctv": 888,
+      "cctvMapped": 888,
+      "lights": 2542,
+      "lightsMapped": 2542,
+      "petRows": 9,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "광주시",
+      "file": "4.json",
+      "center": [
+        37.4294,
+        127.2551
+      ],
+      "bounds": [
+        126.9616891,
+        37.2716535,
+        127.445428,
+        37.8144147
+      ],
+      "cctv": 1726,
+      "cctvMapped": 1726,
+      "lights": 13491,
+      "lightsMapped": 13474,
+      "petRows": 135,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "구리시",
+      "file": "5.json",
+      "center": [
+        37.5943,
+        127.1296
+      ],
+      "bounds": [
+        127.003207,
+        37.56101,
+        127.1673472,
+        38.464802
+      ],
+      "cctv": 1342,
+      "cctvMapped": 1342,
+      "lights": 2072,
+      "lightsMapped": 2072,
+      "petRows": 1,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "군포시",
+      "file": "6.json",
+      "center": [
+        37.3617,
+        126.9352
+      ],
+      "bounds": [
+        126.8841824,
+        37.3056526,
+        126.9615927,
+        37.3782142
+      ],
+      "cctv": 1706,
+      "cctvMapped": 1679,
+      "lights": 2616,
+      "lightsMapped": 2616,
+      "petRows": 9,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "김포시",
+      "file": "7.json",
+      "center": [
+        37.6153,
+        126.7155
+      ],
+      "bounds": [
+        126.521902,
+        37.351754,
+        127.683446,
+        38.6281085
+      ],
+      "cctv": 1660,
+      "cctvMapped": 1656,
+      "lights": 11504,
+      "lightsMapped": 11267,
+      "petRows": 45,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "latestPetYear": "2022"
+    },
+    {
+      "name": "남양주시",
+      "file": "8.json",
+      "center": [
+        37.636,
+        127.2165
+      ],
+      "bounds": [
+        127.095112,
+        37.5142819,
+        127.3753336,
+        37.7702042
+      ],
+      "cctv": 2460,
+      "cctvMapped": 2460,
+      "lights": 14682,
+      "lightsMapped": 14682,
+      "petRows": 16,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "동두천시",
+      "file": "9.json",
+      "center": [
+        37.9036,
+        127.0607
+      ],
+      "bounds": [
+        127.0105498,
+        37.8638917,
+        127.1553499,
+        38.236377
+      ],
+      "cctv": 579,
+      "cctvMapped": 579,
+      "lights": 3402,
+      "lightsMapped": 3401,
+      "petRows": 13,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "부천시",
+      "file": "10.json",
+      "center": [
+        37.5034,
+        126.766
+      ],
+      "bounds": [
+        126.742245,
+        37.459264,
+        126.8308477,
+        37.5540062
+      ],
+      "cctv": 2136,
+      "cctvMapped": 2136,
+      "lights": 9540,
+      "lightsMapped": 9540,
+      "petRows": 89,
+      "petYears": [
+        "2023",
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "성남시",
+      "file": "11.json",
+      "center": [
+        37.42,
+        127.1267
+      ],
+      "bounds": [
+        127.025003,
+        37.2031,
+        127.18674,
+        37.4741
+      ],
+      "cctv": 2954,
+      "cctvMapped": 2954,
+      "lights": 9640,
+      "lightsMapped": 9640,
+      "petRows": 170,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "latestPetYear": "2023"
+    },
+    {
+      "name": "수원시",
+      "file": "12.json",
+      "center": [
+        37.2636,
+        127.0286
+      ],
+      "bounds": [
+        126.9321152,
+        37.1831,
+        127.0811508,
+        37.338008
+      ],
+      "cctv": 1,
+      "cctvMapped": 1,
+      "lights": 16953,
+      "lightsMapped": 16953,
+      "petRows": 275,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "시흥시",
+      "file": "13.json",
+      "center": [
+        37.38,
+        126.803
+      ],
+      "bounds": [
+        126.6552959,
+        37.31135,
+        126.8782798,
+        37.4711694
+      ],
+      "cctv": 1991,
+      "cctvMapped": 1991,
+      "lights": 9287,
+      "lightsMapped": 9212,
+      "petRows": 31,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "안산시",
+      "file": "14.json",
+      "center": [
+        37.3219,
+        126.8309
+      ],
+      "bounds": [
+        126.3870272,
+        37.0969289,
+        126.931983,
+        37.3708365
+      ],
+      "cctv": 2901,
+      "cctvMapped": 2901,
+      "lights": 12931,
+      "lightsMapped": 12931,
+      "petRows": 0,
+      "petYears": [],
+      "latestPetYear": null
+    },
+    {
+      "name": "안성시",
+      "file": "15.json",
+      "center": [
+        37.008,
+        127.2797
+      ],
+      "bounds": [
+        127.1089111,
+        36.898322,
+        127.51554,
+        37.147652
+      ],
+      "cctv": 3107,
+      "cctvMapped": 3056,
+      "lights": 16216,
+      "lightsMapped": 16216,
+      "petRows": 46,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "안양시",
+      "file": "16.json",
+      "center": [
+        37.3943,
+        126.9568
+      ],
+      "bounds": [
+        126.366315,
+        37.3619635,
+        126.9808953,
+        37.4434347
+      ],
+      "cctv": 1632,
+      "cctvMapped": 1632,
+      "lights": 2376,
+      "lightsMapped": 1523,
+      "petRows": 0,
+      "petYears": [],
+      "latestPetYear": null
+    },
+    {
+      "name": "양주시",
+      "file": "17.json",
+      "center": [
+        37.7853,
+        127.0458
+      ],
+      "bounds": [
+        126.9069152,
+        37.6696893,
+        129.0661,
+        37.992643
+      ],
+      "cctv": 1472,
+      "cctvMapped": 1472,
+      "lights": 9983,
+      "lightsMapped": 9883,
+      "petRows": 66,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "latestPetYear": "2022"
+    },
+    {
+      "name": "양평군",
+      "file": "18.json",
+      "center": [
+        37.4918,
+        127.4876
+      ],
+      "bounds": [
+        127.311978,
+        37.370423,
+        127.812566,
+        37.7086346
+      ],
+      "cctv": 3006,
+      "cctvMapped": 3006,
+      "lights": 20487,
+      "lightsMapped": 20487,
+      "petRows": 36,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "latestPetYear": "2022"
+    },
+    {
+      "name": "여주시",
+      "file": "19.json",
+      "center": [
+        37.298,
+        127.637
+      ],
+      "bounds": [
+        127.4145412,
+        37.1434754,
+        127.7670842,
+        37.4381026
+      ],
+      "cctv": 769,
+      "cctvMapped": 769,
+      "lights": 8445,
+      "lightsMapped": 8229,
+      "petRows": 158,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "연천군",
+      "file": "20.json",
+      "center": [
+        38.0964,
+        127.074
+      ],
+      "bounds": [
+        126.8238088,
+        37.5740911,
+        127.161086,
+        38.23561
+      ],
+      "cctv": 596,
+      "cctvMapped": 596,
+      "lights": 4599,
+      "lightsMapped": 4599,
+      "petRows": 10,
+      "petYears": [
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "오산시",
+      "file": "21.json",
+      "center": [
+        37.1498,
+        127.077
+      ],
+      "bounds": [
+        126.977969,
+        37.125815,
+        127.0968159,
+        37.566535
+      ],
+      "cctv": 655,
+      "cctvMapped": 655,
+      "lights": 3977,
+      "lightsMapped": 3977,
+      "petRows": 24,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "용인시",
+      "file": "22.json",
+      "center": [
+        37.2411,
+        127.1776
+      ],
+      "bounds": [
+        127.0292864,
+        36.740723,
+        127.445512,
+        37.3707961
+      ],
+      "cctv": 2860,
+      "cctvMapped": 2860,
+      "lights": 22476,
+      "lightsMapped": 22476,
+      "petRows": 168,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "latestPetYear": "2023"
+    },
+    {
+      "name": "의왕시",
+      "file": "23.json",
+      "center": [
+        37.3447,
+        126.9683
+      ],
+      "bounds": [
+        126.57185,
+        37.18118,
+        127.94842,
+        37.411111
+      ],
+      "cctv": 1661,
+      "cctvMapped": 1558,
+      "lights": 2119,
+      "lightsMapped": 2119,
+      "petRows": 11,
+      "petYears": [
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "의정부시",
+      "file": "24.json",
+      "center": [
+        37.738,
+        127.0337
+      ],
+      "bounds": [
+        126.64471,
+        37.45457,
+        127.123705,
+        37.776865
+      ],
+      "cctv": 1649,
+      "cctvMapped": 1649,
+      "lights": 4530,
+      "lightsMapped": 4530,
+      "petRows": 52,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "latestPetYear": "2023"
+    },
+    {
+      "name": "이천시",
+      "file": "25.json",
+      "center": [
+        37.272,
+        127.435
+      ],
+      "bounds": [
+        127.3386479,
+        37.0437284,
+        127.6368632,
+        38.285041
+      ],
+      "cctv": 4003,
+      "cctvMapped": 3874,
+      "lights": 11220,
+      "lightsMapped": 11220,
+      "petRows": 150,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "파주시",
+      "file": "26.json",
+      "center": [
+        37.76,
+        126.78
+      ],
+      "bounds": [
+        126.530752,
+        37.072564,
+        127.754025,
+        38.045223
+      ],
+      "cctv": 3702,
+      "cctvMapped": 3661,
+      "lights": 5977,
+      "lightsMapped": 5976,
+      "petRows": 192,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "latestPetYear": "2025"
+    },
+    {
+      "name": "평택시",
+      "file": "27.json",
+      "center": [
+        36.9921,
+        127.1129
+      ],
+      "bounds": [
+        126.5809,
+        36.0085,
+        127.5071,
+        37.9998
+      ],
+      "cctv": 6099,
+      "cctvMapped": 5827,
+      "lights": 8836,
+      "lightsMapped": 8836,
+      "petRows": 395,
+      "petYears": [
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "포천시",
+      "file": "28.json",
+      "center": [
+        37.895,
+        127.2
+      ],
+      "bounds": [
+        126.8745,
+        37.0647543,
+        127.4603,
+        38.1806894
+      ],
+      "cctv": 1503,
+      "cctvMapped": 1503,
+      "lights": 15027,
+      "lightsMapped": 15027,
+      "petRows": 89,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "하남시",
+      "file": "29.json",
+      "center": [
+        37.5393,
+        127.2146
+      ],
+      "bounds": [
+        127.1415303,
+        35.14829,
+        129.0531,
+        37.5815207
+      ],
+      "cctv": 1009,
+      "cctvMapped": 1009,
+      "lights": 4640,
+      "lightsMapped": 4640,
+      "petRows": 111,
+      "petYears": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "latestPetYear": "2024"
+    },
+    {
+      "name": "화성시",
+      "file": "30.json",
+      "center": [
+        37.1995,
+        126.8312
+      ],
+      "bounds": [
+        124.769908,
+        33.4542332,
+        127.1531678,
+        37.2927516
+      ],
+      "cctv": 25407,
+      "cctvMapped": 23508,
+      "lights": 21171,
+      "lightsMapped": 21171,
+      "petRows": 52,
+      "petYears": [
+        "2026"
+      ],
+      "latestPetYear": "2026"
+    },
+    {
+      "name": "지역 미확인",
+      "file": "31.json",
+      "center": [
+        37.53,
+        127.12
+      ],
+      "bounds": null,
+      "cctv": 0,
+      "cctvMapped": 0,
+      "lights": 0,
+      "lightsMapped": 0,
+      "petRows": 0,
+      "petYears": [],
+      "latestPetYear": null
+    }
+  ],
+  "files": {
+    "0.json": {
+      "sha256": "e26560b39d3187e424de5e7d3b5b09746fd4b3d3eda5ff042a93f77a2f6f583c",
+      "bytes": 3284518
+    },
+    "1.json": {
+      "sha256": "76c0996adab03ffaca4f2984c0b28b5a1605e4f2a437f7d91e632d1b3ec865de",
+      "bytes": 5242811
+    },
+    "2.json": {
+      "sha256": "a1e8837d30eec562391d9f76876fa087d41ad535c6a58d921e3573c4b90e0a42",
+      "bytes": 642011
+    },
+    "3.json": {
+      "sha256": "842ab04b78b1cee4ae9cf89953be8c2801ed6801a3a23036e824d1c0ce0fc67d",
+      "bytes": 1014350
+    },
+    "4.json": {
+      "sha256": "bf3cef22325d7c5acc8d79d1d824080b726674d42cab30e767cf170b8820841b",
+      "bytes": 4481321
+    },
+    "5.json": {
+      "sha256": "aba8e094bc01ac9c658f205645e40cbb3005cbe53666b084ca6e1c39c9a42b02",
+      "bytes": 985346
+    },
+    "6.json": {
+      "sha256": "0914981bfbb9b046bd6f84cc09724025196239fca2ac3c1376182a7c6af15adc",
+      "bytes": 1248344
+    },
+    "7.json": {
+      "sha256": "a2a3166e3f73839ed03a31cf018af1116b025bae5daffee7eb88c1fba3f87f2b",
+      "bytes": 3943205
+    },
+    "8.json": {
+      "sha256": "592cf594aa18462b750cfdb0e58b6d46406e1afaa5c4ec74109d5e798503e9d0",
+      "bytes": 4940442
+    },
+    "9.json": {
+      "sha256": "a71227c4f3c38ff15201b3e7740ffde637db6a85255d815877b747878bbca406",
+      "bytes": 1173951
+    },
+    "10.json": {
+      "sha256": "e6c2fa0b0ff360a07846236e462bb062bb01f72ac642c8ca4fc7b8a32637e69f",
+      "bytes": 3625043
+    },
+    "11.json": {
+      "sha256": "83d06ad656f68c9b299b22b33b2ec8dfd999dbdf37a24a3a65d7d2f9a93f99e9",
+      "bytes": 3792067
+    },
+    "12.json": {
+      "sha256": "bb6e585fa8cfe3a4a0586aef011059605d28c9a13090c4b1ebb8e74c10a16205",
+      "bytes": 5095685
+    },
+    "13.json": {
+      "sha256": "234f23842e8eade3b986d0da652e44660d8fedfaf135143696b37ea9a11f95d7",
+      "bytes": 3159982
+    },
+    "14.json": {
+      "sha256": "09b353ab6e9d09f9548b5e940427d99373cab57f0d115ff3082fd5cef5609b7e",
+      "bytes": 4879316
+    },
+    "15.json": {
+      "sha256": "f623f509090d38611313e681ba24daf046a828d4858e405288d5fe087a0800c1",
+      "bytes": 5440853
+    },
+    "16.json": {
+      "sha256": "0c395b753e5558ee9ecdf9293f017b40b541cca9be2f755db3f5b06748941b5f",
+      "bytes": 1199404
+    },
+    "17.json": {
+      "sha256": "4ee32993bf9e6e717c6b6b799bc15f4ef06e1b7c435a5108f0374e51d46ebce9",
+      "bytes": 3294011
+    },
+    "18.json": {
+      "sha256": "556e818dffeace47c52f1eeff8d8edd3422df002b45bce589cb9844ba383043e",
+      "bytes": 6992819
+    },
+    "19.json": {
+      "sha256": "f229230f196ddaa78ffe221ad7192f0f34eef541c18d7856d4ca1445a906bace",
+      "bytes": 2741238
+    },
+    "20.json": {
+      "sha256": "2de67f0c2bb37a1019dccf74af270a72a1aa114a5f5f9d7853daecbb5474f861",
+      "bytes": 1522095
+    },
+    "21.json": {
+      "sha256": "c3fb78d91f8ca759bf8639c76e7652498d69edbd004869fa20ab71d98013aa0e",
+      "bytes": 1400268
+    },
+    "22.json": {
+      "sha256": "3b3edc2c9309995a9c3f2972d0d2df595d6395cb3721010ce9ff58c307c67e85",
+      "bytes": 7928007
+    },
+    "23.json": {
+      "sha256": "c74f4d8c9323e3a0d69d96f8cc9d8b6d78c5f8eee138bc0724cc23ee6f3a8af7",
+      "bytes": 1095610
+    },
+    "24.json": {
+      "sha256": "48d9c3b1ba87e648188670b1c55f89b22183ab82abeb934780d904f526d2fc66",
+      "bytes": 1821120
+    },
+    "25.json": {
+      "sha256": "0fba58eda1f53b92075eefcd5a8d4441741532c23bf4af4bd1505a17de1c648e",
+      "bytes": 4400822
+    },
+    "26.json": {
+      "sha256": "54fabff0f91df513da0ab37d723463fcfd30aec120df9a0e412c01b7d1f54ada",
+      "bytes": 2918822
+    },
+    "27.json": {
+      "sha256": "c62cd9a2c36dee31b7e7f55af951b859c6e2537add7e76a9d764bc519abaa7a1",
+      "bytes": 4372655
+    },
+    "28.json": {
+      "sha256": "6f3c7d16fcac21a883e939497f2b8dc1c3fe12563d0ffe26c7d85f776570c4fc",
+      "bytes": 4940331
+    },
+    "29.json": {
+      "sha256": "090cfb9387bbb3fe7b3cdbca7e6173b9c7970eff52e0cd8d53ca28d051130e47",
+      "bytes": 1648565
+    },
+    "30.json": {
+      "sha256": "03a1ccce7215d2160f2ac439ed3e788583fab8abc02d54acd3ba5748feb73378",
+      "bytes": 13969613
+    },
+    "31.json": {
+      "sha256": "14c6db44b4f576bd8c2ca0910a0a158f0a3124527dd5cd3ab59f3e7db553b627",
+      "bytes": 33
+    }
+  }
+}

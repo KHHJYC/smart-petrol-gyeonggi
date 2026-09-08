@@ -1,0 +1,24 @@
+name: Validate Smart Petrol
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run test
+      - run: npm run build:pages
+      - run: npm run test:pages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validated-web-build
+          path: site-static/
+          retention-days: 7
