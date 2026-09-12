@@ -20,6 +20,11 @@ export default defineConfig({
       enforce: 'pre',
       transform(code, id) {
         if (!id.endsWith('/components/petrol-app.tsx')) return;
+        if (process.env.VITE_SUPABASE_URL && process.env.VITE_SUPABASE_ANON_KEY) {
+          return code
+            .replaceAll('현재 계정에 저장한 실제 기록', '공개 승인 기록과 내가 작성한 기록')
+            .replaceAll('현재 계정의 기록', '공개 기록과 내 기록');
+        }
         return code.replaceAll('현재 계정', '이 브라우저').replaceAll('계정에 보관', '이 브라우저에 보관').replaceAll('계정의 기록', '브라우저 기록');
       },
     },

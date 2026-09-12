@@ -93,6 +93,8 @@ export type FieldReport = {
   status: '접수' | '현장 확인' | '조치 확인' | '종료';
   created: string;
   updated: string;
+  moderation_status?: 'pending' | 'approved' | 'rejected';
+  is_own?: boolean;
 };
 export const number = (n: number | null | undefined) =>
   n == null ? '—' : n.toLocaleString('ko-KR');

@@ -1,21 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {build} from 'esbuild';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import fs from 'node:fs';
-import vm from 'node:vm';
+import {installHtmlPreview} from '../html-preview/runtime.ts';
+import {installCompressedData} from '../pages/runtime.ts';
 
 async function environment(plain=false) {
   const storage=new Map();const requests=[];
   const original=async(input)=>{const u=String(input);requests.push(u);return new Response(plain?'{"ok":true}':gzipSync('{"ok":true}'))};
-  const context=vm.createContext({window:{location:{href:'https://example.github.io/smart-petrol-gyeonggi/',origin:'https://example.github.io'},fetch:original,DecompressionStream},localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},Response,Request,URL,Blob,DecompressionStream,atob,crypto});
-  for(const [file,name] of [['html-preview/runtime.ts','Records'],['pages/runtime.ts','Data']]) {
-    const code=await build({entryPoints:[file],bundle:true,write:false,format:'iife',globalName:name,platform:'browser'});
-    vm.runInContext(code.outputFiles[0].text,context);
-  }
-  context.Records.installHtmlPreview({storageKey:'test-records'});
-  context.Data.installCompressedData();
-  return {context,storage,requests,request:context.window.fetch};
+  globalThis.window={location:{href:'https://example.github.io/smart-petrol-gyeonggi/',origin:'https://example.github.io'},fetch:original,DecompressionStream};
+  globalThis.localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)};
+  installHtmlPreview({storageKey:'test-records'});
+  installCompressedData();
+  return {storage,requests,request:window.fetch};
 }
 test('mobile data transport uses repository path and handles raw or decoded gzip',async()=>{
   for(const plain of [false,true]) {

@@ -203,7 +203,7 @@ export default function PatrolMap({
           fillOpacity: 1,
         }).addTo(g);
         const text = document.createElement('span');
-        text.textContent = `${report.status} · ${report.title}`;
+        text.textContent = `${report.moderation_status === 'pending' ? '승인 대기 · ' : ''}${report.status} · ${report.title}`;
         marker.bindTooltip(text);
         marker.on('click', (e) => {
           L.DomEvent.stopPropagation(e);

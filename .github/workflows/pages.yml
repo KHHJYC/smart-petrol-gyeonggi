@@ -43,6 +43,9 @@ jobs:
       - run: npm run lint:app
       - run: npm test
       - run: npm run build:pages
+        env:
+          VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
       - run: npm run test:pages
       - name: Scan the public artifact
         env:

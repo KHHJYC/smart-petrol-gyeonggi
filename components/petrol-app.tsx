@@ -1432,6 +1432,12 @@ export default function PetrolApp() {
                             <small>{date(r.created)}</small>
                           </div>
                           <h3>{r.title}</h3>
+                          {r.moderation_status === 'pending' && (
+                            <p className="evidence-text">공개 승인 대기 · 작성자에게만 보입니다.</p>
+                          )}
+                          {r.moderation_status === 'rejected' && (
+                            <p className="evidence-text">비공개 처리 · 내용을 확인해 주세요.</p>
+                          )}
                           <p>{r.description}</p>
                           {r.evidence && (
                             <p className="evidence-text">
@@ -1466,19 +1472,21 @@ export default function PetrolApp() {
                               지도 보기
                               <ArrowRight size={14} />
                             </button>
-                            <button
-                              className="text-button"
-                              onClick={() => {
-                                setReview(r);
-                                setReviewStatus(r.status);
-                                setEvidence(r.evidence);
-                                setSaveError('');
-                                setDialog('review');
-                              }}
-                            >
-                              기록 · 확인 상태
-                              <ChevronRight size={14} />
-                            </button>
+                            {r.is_own !== false && (
+                              <button
+                                className="text-button"
+                                onClick={() => {
+                                  setReview(r);
+                                  setReviewStatus(r.status);
+                                  setEvidence(r.evidence);
+                                  setSaveError('');
+                                  setDialog('review');
+                                }}
+                              >
+                                기록 · 확인 상태
+                                <ChevronRight size={14} />
+                              </button>
+                            )}
                           </div>
                         </article>
                       ))}

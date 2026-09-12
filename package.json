@@ -12,11 +12,11 @@
     "lint": "oxlint",
     "format": "oxfmt",
     "check": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test tests/patrol.test.mjs",
-    "lint:app": "oxlint components/petrol-app.tsx components/patrol-map.tsx components/lighting-context.tsx app/api/records/route.ts app/api/cctv/route.ts lib/server-db.ts lib/patrol.ts hooks/use-public-map-tool.ts",
+    "test": "node --experimental-strip-types --test tests/patrol.test.mjs tests/shared-records.test.mjs",
+    "lint:app": "oxlint components/petrol-app.tsx components/patrol-map.tsx components/lighting-context.tsx pages/shared-records.ts app/api/records/route.ts app/api/cctv/route.ts lib/server-db.ts lib/patrol.ts hooks/use-public-map-tool.ts",
     "setup:local": "node scripts/local-db.mjs",
     "build:pages": "vite build --config vite.pages.config.ts",
-    "test:pages": "node --test tests/pages.test.mjs"
+    "test:pages": "node --experimental-strip-types --test tests/pages.test.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
