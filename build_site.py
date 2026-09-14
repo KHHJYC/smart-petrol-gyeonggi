@@ -66,6 +66,9 @@ def main():
               'lights':len(block['lights']),'lightsMapped':sum(r['lat'] is not None for r in block['lights']),
               'petRows':len(block['pets']),'petYears':years,'latestPetYear':years[-1] if years else None})
     pathlib.Path('public/data/manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+    cumulative = raw / 'petCumulative.json'
+    if cumulative.exists():
+        pathlib.Path('public/data/pet-cumulative.json').write_text(cumulative.read_text(encoding='utf-8'),encoding='utf-8')
     print(json.dumps({'sources':manifest['sources'],'regions':len(grouped)},ensure_ascii=False))
 
 if __name__ == '__main__': main()

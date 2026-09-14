@@ -125,6 +125,14 @@ type Patrol = {
   ended: string;
   seconds: number;
 };
+type CumulativePets = {
+  checkedAt: string;
+  source: string;
+  scope: string;
+  includesDeceased: boolean;
+  sourceRows: number;
+  cities: Record<string, { dogs: number; cats: number; other: number; total: number }>;
+};
 const EMPTY: RegionData = { cctv: [], lights: [], pets: [] };
 const CHECKS = [
   '목줄·배변봉투 준비',
@@ -241,6 +249,7 @@ export default function PetrolApp() {
     [petYear, setPetYear] = useState(''),
     [pets, setPets] = useState<RegionData>(EMPTY),
     [petLoading, setPetLoading] = useState(false);
+  const [cumulativePets, setCumulativePets] = useState<CumulativePets | null>(null);
   const [recordCity, setRecordCity] = useState('성남시'),
     [patrolCity, setPatrolCity] = useState('성남시');
   const [title, setTitle] = useState(''),
@@ -374,6 +383,10 @@ export default function PetrolApp() {
       .then((r) => r.json())
       .then((b) => setBriefing(b as NonNullable<typeof briefing>))
       .catch(() => {});
+    fetch(asset('data/pet-cumulative.json'), { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((b) => setCumulativePets(b as CumulativePets))
+      .catch(() => setCumulativePets(null));
     fetch(asset('data/inspection.json'))
       .then(async (r) => {
         if (!r.ok) throw Error();
@@ -1655,6 +1668,49 @@ export default function PetrolApp() {
                         <PawPrint size={23} />
                       </span>
                     </div>
+                    {cumulativePets?.cities[petCity] ? (
+                      <div className="cumulative-pets">
+                        <div className="cumulative-pets-title">
+                          <div>
+                            <span>공식 누적 등록 운영자료</span>
+                            <h3>{petCity} 반려견 및 반려동물 등록 현황</h3>
+                          </div>
+                          <span className="pill teal">API 자동 갱신</span>
+                        </div>
+                        <div className="cumulative-pet-grid">
+                          <div>
+                            <span>등록 반려견</span>
+                            <strong>{number(cumulativePets.cities[petCity].dogs)}<small>마리</small></strong>
+                          </div>
+                          <div>
+                            <span>등록 반려묘</span>
+                            <strong>{number(cumulativePets.cities[petCity].cats)}<small>마리</small></strong>
+                          </div>
+                          <div>
+                            <span>전체 등록 반려동물</span>
+                            <strong>{number(cumulativePets.cities[petCity].total)}<small>마리</small></strong>
+                          </div>
+                        </div>
+                        <p className="cumulative-note">
+                          농림축산검역본부 누적 등록 운영자료이며 말소·사망 개체가 포함될 수 있습니다.
+                          현재 사육 개체 수나 순찰 참여 가능 인원으로 해석하지 않습니다. 확인일 {date(cumulativePets.checkedAt)}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="cumulative-pets pending">
+                        <div className="cumulative-pets-title">
+                          <div>
+                            <span>누적 등록 API</span>
+                            <h3>{petCity} 반려견·반려묘 누적 현황</h3>
+                          </div>
+                          <span className="pill amber">키 등록 대기</span>
+                        </div>
+                        <p className="cumulative-note">
+                          농림축산식품 공공데이터포털의 별도 인증키를 등록하면 이 영역에
+                          시군별 반려견·반려묘·전체 누적 등록 수가 매일 자동 표시됩니다.
+                        </p>
+                      </div>
+                    )}
                     {petLoading ? (
                       <div className="empty-state">
                         <span className="loader" />

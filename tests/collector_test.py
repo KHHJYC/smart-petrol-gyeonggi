@@ -5,11 +5,24 @@ from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('collector', pathlib.Path(__file__).parents[1]/'collect_gg.py')
 collector=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(collector)
+pet_spec=importlib.util.spec_from_file_location('pet_collector', pathlib.Path(__file__).parents[1]/'collect_pet_cumulative.py')
+pet_collector=importlib.util.module_from_spec(pet_spec)
+pet_spec.loader.exec_module(pet_collector)
 sys.path.insert(0,str(pathlib.Path(__file__).parents[1]/'scripts'))
 from check_data_quality import check_counts
 from restore_published_snapshot import validate
 
 class CollectionFailureTests(unittest.TestCase):
+    def test_cumulative_pet_collection_groups_species_without_inventing_current_population(self):
+        rows=[
+            {'SGG':'양주시','LVSTCK_KND':'개','CNT':10},
+            {'SGG':'양주시','LVSTCK_KND':'고양이','CNT':2},
+            {'SGG':'양주시','LVSTCK_KND':'기타','CNT':1},
+        ]
+        with patch.object(pet_collector,'fetch_page',return_value=(3,rows)):
+            result=pet_collector.collect('dummy-key')
+        self.assertEqual(result['cities']['양주시'],{'dogs':10,'cats':2,'other':1,'total':13})
+        self.assertTrue(result['includesDeceased'])
     def test_published_fallback_requires_complete_current_quality_data(self):
         baseline={'sources':{'cctv':{'mapped':100},'lights':{'mapped':100}}}
         payloads={

@@ -1,0 +1,9 @@
+{
+  "checkedAt": "",
+  "source": "농림축산식품부 농림축산검역본부 동물등록 현황",
+  "endpoint": "Grid_20210806000000000612_1",
+  "scope": "경기도 누적 등록 운영자료",
+  "includesDeceased": true,
+  "sourceRows": 0,
+  "cities": {}
+}

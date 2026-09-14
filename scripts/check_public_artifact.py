@@ -1,10 +1,10 @@
 """Reject secrets, local records, runtime bindings and source files in a web artifact."""
 import gzip, os, pathlib, sys
 root=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else 'site-static')
-keys=[os.environ.get('GG_API_KEY','').strip()]
+keys=[os.environ.get(name,'').strip() for name in ('GG_API_KEY','MAFRA_API_KEY')]
 if len(sys.argv)>2:
     for line in pathlib.Path(sys.argv[2]).read_text(encoding='utf8').splitlines():
-        if line.startswith('GG_API_KEY='): keys.append(line.split('=',1)[1].strip().strip('\"\''))
+        if line.split('=',1)[0] in ('GG_API_KEY','MAFRA_API_KEY'): keys.append(line.split('=',1)[1].strip().strip('\"\''))
 keys=[k.encode() for k in keys if k]
 count=0
 for p in root.rglob('*'):
