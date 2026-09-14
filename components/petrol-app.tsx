@@ -1588,13 +1588,13 @@ export default function PetrolApp() {
                       우리 동네의 <span>참여 가능성을 살펴봐요.</span>
                     </h1>
                     <p className="muted">
-                      반려동물 등록 자료를 순찰대 모집과 지역 이해의 참고자료로
-                      활용합니다.
+                      기준연도별 반려동물 등록 실적을 순찰대 모집과 지역 이해의
+                      참고자료로 활용합니다.
                     </p>
                   </div>
                   <span className="pill teal">
                     <Database size={15} />
-                    실제 등록 통계
+                    경기도 연도별 등록 실적
                   </span>
                 </section>
                 <div className="region-layout">
@@ -1629,8 +1629,9 @@ export default function PetrolApp() {
                       <PawPrint size={26} />
                       <h3>모집의 가능성을 살피는 자료</h3>
                       <p>
-                        등록동물 수에는 개·고양이 구분이 없습니다. 실제 참여
-                        인원은 별도 모집과 동의로 확인합니다.
+                        이 자료는 선택한 연도의 등록 실적입니다. 누적 등록 총수나
+                        현재 사육 중인 동물 수가 아니며, 개·고양이도 구분하지
+                        않습니다.
                       </p>
                     </div>
                     <button
@@ -1647,7 +1648,7 @@ export default function PetrolApp() {
                   <section className="white-card pet-statistics">
                     <div className="section-heading large">
                       <div>
-                        <h2>{petCity} 반려동물 등록 현황</h2>
+                        <h2>{petCity} 반려동물 연도별 등록 실적</h2>
                         <p>{petYear ? petYear + '년 자료' : '자료 미수록'}</p>
                       </div>
                       <span className="stat-icon teal">
@@ -1671,8 +1672,8 @@ export default function PetrolApp() {
                           <div>
                             <span>
                               {petStats.ambiguous
-                                ? '중복 의심·합계 행을 제외한 참고 합계'
-                                : '합계 행을 제외한 수록 읍면동 합계'}
+                                ? '중복 의심·합계 행을 제외한 선택 연도 참고 합계'
+                                : '선택 연도 수록 읍면동 등록 실적 합계'}
                             </span>
                             <strong>
                               {number(petStats.known)}
@@ -1683,6 +1684,14 @@ export default function PetrolApp() {
                             <strong>{number(petStats.rows.length)}</strong>
                             <span>수록 행</span>
                           </div>
+                        </div>
+                        <div className="callout">
+                          <Info size={18} />
+                          <p>
+                            경기데이터드림은 기준연도별 등록 실적을 제공합니다.
+                            다른 자료의 누적 등록 수치와는 집계 범위가 달라 직접
+                            비교할 수 없습니다.
+                          </p>
                         </div>
                         {petStats.ambiguous > 0 && (
                           <div className="callout warning">
@@ -1737,7 +1746,7 @@ export default function PetrolApp() {
                             <thead>
                               <tr>
                                 <th>읍면동</th>
-                                <th>등록동물</th>
+                                <th>해당 연도 등록동물</th>
                                 <th>소유자</th>
                                 <th>자료 기준일</th>
                                 <th>확인 상태</th>
