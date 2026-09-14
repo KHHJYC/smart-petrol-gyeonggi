@@ -7,8 +7,22 @@ collector=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(collector)
 sys.path.insert(0,str(pathlib.Path(__file__).parents[1]/'scripts'))
 from check_data_quality import check_counts
+from restore_published_snapshot import validate
 
 class CollectionFailureTests(unittest.TestCase):
+    def test_published_fallback_requires_complete_current_quality_data(self):
+        baseline={'sources':{'cctv':{'mapped':100},'lights':{'mapped':100}}}
+        payloads={
+            pathlib.Path('manifest.json'): b'{"checkedAt":"same","sources":{"cctv":{"mapped":100},"lights":{"mapped":100}}}',
+            pathlib.Path('inspection.json'): b'{"checkedAt":"same"}',
+        }
+        for index in range(32):
+            payloads[pathlib.Path(f'regions/{index}.json')]=b'{}'
+        self.assertEqual(validate(payloads,baseline)['checkedAt'],'same')
+        payloads[pathlib.Path('manifest.json')]=b'{"checkedAt":"same","sources":{"cctv":{"mapped":89},"lights":{"mapped":100}}}'
+        with self.assertRaisesRegex(RuntimeError,'below the repository baseline'):
+            validate(payloads,baseline)
+
     def test_official_coordinate_loss_blocks_publication(self):
         with self.assertRaisesRegex(RuntimeError,'Previous public map retained'):
             check_counts('cctv',2606,80546)

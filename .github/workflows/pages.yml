@@ -34,11 +34,16 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: python tests/collector_test.py
       - name: Collect complete official data snapshot
+        id: refresh
         if: github.event_name != 'workflow_dispatch' || inputs.refresh_data
+        continue-on-error: true
         timeout-minutes: 15
         env:
           GG_API_KEY: ${{ secrets.GG_API_KEY }}
         run: python -u scripts/refresh_data.py
+      - name: Keep the last deployed validated snapshot when the API is unavailable
+        if: steps.refresh.outcome == 'failure'
+        run: python -u scripts/restore_published_snapshot.py
       - run: npm run check
       - run: npm run lint:app
       - run: npm test
