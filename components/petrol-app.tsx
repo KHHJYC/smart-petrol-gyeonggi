@@ -124,7 +124,13 @@ type Patrol = {
   started: string;
   ended: string;
   seconds: number;
+  // 공용 기록 모드에서만 온다. false 면 다른 사람 순찰이라 시각 없이 날짜만 있다.
+  is_own?: boolean;
 };
+// 다른 사람 순찰은 서버가 시각을 0시로 잘라 보내므로 '00:00 ~ 00:00'처럼
+// 보이지 않게 날짜만 쓴다. 본인 순찰과 브라우저 저장 모드는 시각을 그대로 쓴다.
+const patrolTime = (p: Patrol) =>
+  p.is_own === false ? date(p.ended) : `${p.started} ~ ${p.ended}`;
 type CumulativePets = {
   checkedAt: string;
   source: string;
@@ -237,6 +243,7 @@ export default function PetrolApp() {
     [nearError, setNearError] = useState('');
   const [reports, setReports] = useState<Report[]>([]),
     [patrols, setPatrols] = useState<Patrol[]>([]),
+    [sharedRecords, setSharedRecords] = useState(false),
     [recordsError, setRecordsError] = useState(''),
     [status, setStatus] = useState('전체');
   const [dialog, setDialog] = useState<
@@ -325,11 +332,13 @@ export default function PetrolApp() {
       const b = (await r.json()) as {
         reports: Report[];
         patrols: Patrol[];
+        shared?: boolean;
         error?: string;
       };
       if (!r.ok) throw Error(b.error);
       setReports(b.reports);
       setPatrols(b.patrols);
+      setSharedRecords(b.shared === true);
     } catch (e) {
       setRecordsError(
         e instanceof Error ? e.message : '현장 기록을 불러오지 못했습니다.',
@@ -1368,7 +1377,11 @@ export default function PetrolApp() {
                         <span>순찰일지</span>
                       </div>
                     </div>
-                    <p>현재 계정에 저장한 실제 기록을 집계합니다.</p>
+                    <p>
+                      {sharedRecords
+                        ? '모든 이용자가 남긴 실제 기록을 집계합니다.'
+                        : '현재 계정에 저장한 실제 기록을 집계합니다.'}
+                    </p>
                   </div>
                 </div>
                 <section className="reports-card">
@@ -1514,7 +1527,7 @@ export default function PetrolApp() {
                     </div>
                     {!patrols.length ? (
                       <p className="muted padded">
-                        아직 저장한 순찰일지가 없어요. 순찰을 마치고 오늘의
+                        아직 남겨진 순찰일지가 없어요. 순찰을 마치고 오늘의
                         관찰을 남겨 보세요.
                       </p>
                     ) : (
@@ -1525,7 +1538,14 @@ export default function PetrolApp() {
                             <strong>
                               {p.city} · {Math.floor(p.seconds / 60)}분 순찰
                             </strong>
-                            <small>{date(p.ended)}</small>
+                            <small>
+                              {date(p.ended)}
+                              {p.is_own === false
+                                ? ' · 이웃 순찰'
+                                : sharedRecords
+                                  ? ' · 내 순찰'
+                                  : ''}
+                            </small>
                             <p>{p.memo}</p>
                           </div>
                           <button
@@ -1534,7 +1554,7 @@ export default function PetrolApp() {
                             onClick={() =>
                               download(
                                 '순찰일지.txt',
-                                `${p.city}\n${p.started} ~ ${p.ended}\n${p.memo}`,
+                                `${p.city}\n${patrolTime(p)}\n${p.memo}`,
                               )
                             }
                           >
@@ -2771,9 +2791,7 @@ export default function PetrolApp() {
             <h2>
               {p.city} 순찰일지 · {Math.floor(p.seconds / 60)}분
             </h2>
-            <p>
-              {p.started} ~ {p.ended}
-            </p>
+            <p>{patrolTime(p)}</p>
             <p>{p.memo}</p>
           </article>
         ))}

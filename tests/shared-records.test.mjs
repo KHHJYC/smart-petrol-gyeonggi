@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { installSharedRecords } from '../pages/shared-records.ts';
 
-test('shared records publish new reports immediately without exposing the author', async () => {
+test('shared records publish reports and patrols immediately without exposing the author', async () => {
   const stored = new Map(), calls = [];
   const user = '11111111-1111-4111-8111-111111111111';
   const remote = async (input, init = {}) => {
@@ -16,7 +16,13 @@ test('shared records publish new reports immediately without exposing the author
       { id: 'mine', title: '내 글', moderation_status: 'approved', is_own: true },
       { id: 'other', title: '다른 사람 글', moderation_status: 'approved', is_own: false },
     ]));
-    if (url.includes('/rest/v1/patrols?')) return new Response('[]');
+    // patrols_feed 도 작성자 번호 없이 is_own 만 돌려준다. 남의 순찰은 날짜만 온다.
+    if (url.includes('/rest/v1/patrols_feed?')) return new Response(JSON.stringify([
+      { id: 'my-walk', city: '양주시', memo: '내 순찰', seconds: 3000,
+        started: '2026-10-18T10:00:00+00:00', ended: '2026-10-18T10:50:00+00:00', is_own: true },
+      { id: 'other-walk', city: '양주시', memo: '이웃 순찰', seconds: 2400,
+        started: '2026-10-17T15:00:00+00:00', ended: '2026-10-17T15:00:00+00:00', is_own: false },
+    ]));
     return new Response('', { status: 201 });
   };
   const previousFetch = globalThis.fetch;
@@ -33,6 +39,14 @@ test('shared records publish new reports immediately without exposing the author
   assert.equal(loaded.reports[1].is_own, false);
   assert.equal('owner' in loaded.reports[0], false);
   assert.equal('owner' in loaded.reports[1], false);
+
+  // 순찰일지도 모두에게 공개하되 작성자 번호는 내보내지 않는다
+  assert.ok(calls.some((c) => c.url.includes('/rest/v1/patrols_feed?')), '순찰일지는 patrols_feed 에서 읽는다');
+  assert.ok(!calls.some((c) => /\/rest\/v1\/patrols\?/.test(c.url)), '순찰 원본 표를 직접 읽지 않는다');
+  assert.equal(loaded.patrols.length, 2);
+  assert.equal(loaded.patrols[0].is_own, true);
+  assert.equal(loaded.patrols[1].is_own, false);
+  assert.equal('owner' in loaded.patrols[1], false);
 
   const saved = await window.fetch('/api/records', { method: 'POST', body: JSON.stringify({
     kind: 'report', title: '보안등 확인', description: '점등되지 않음', city: '성남시', category: '보안등 꺼짐·깜빡임',

@@ -14,6 +14,6 @@ const sharedKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 if (sharedUrl?.startsWith('https://') && sharedKey) {
   installSharedRecords({ url: sharedUrl, key: sharedKey });
   const notice = document.getElementById('record-notice');
-  if (notice) notice.textContent = '현장 기록은 저장하는 즉시 모든 이용자의 지도에 표시됩니다. 작성자는 공개되지 않습니다. 순찰일지는 작성자만 볼 수 있습니다.';
+  if (notice) notice.textContent = '현장 기록과 순찰일지는 저장하는 즉시 모든 이용자에게 공개됩니다. 작성자는 공개되지 않고, 다른 사람의 순찰은 날짜만 보입니다. 메모에 개인정보는 적지 마세요.';
 }
 createRoot(document.getElementById('root')!).render(<PetrolApp />);

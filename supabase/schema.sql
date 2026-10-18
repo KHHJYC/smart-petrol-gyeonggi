@@ -1,6 +1,6 @@
 -- 스마트펫트롤 공용 기록 스키마
 --
--- 현장 기록은 저장하는 즉시 모든 이용자의 지도에 공개된다.
+-- 현장 기록과 순찰일지는 저장하는 즉시 모든 이용자에게 공개된다.
 -- 작성자는 Supabase 익명 로그인으로만 구분하며 이름·연락처를 받지 않는다.
 --
 -- 익명성: 공개 목록(reports_feed)에는 작성자 번호(owner)를 내보내지 않는다.
@@ -81,5 +81,22 @@ create or replace view public.reports_feed as
 revoke all on public.reports_feed from anon, authenticated;
 grant select on public.reports_feed to authenticated;
 
+-- 순찰일지 공개 목록. 작성자 번호는 빼고, 다른 사람의 순찰은 시작·종료 시각을
+-- 그날 0시(한국 시각)로 잘라 날짜만 남긴다. 정확한 시각이 쌓이면
+-- '매일 저녁 몇 시에 걷는 사람'처럼 생활 패턴이 드러나기 때문이다.
+-- 걸린 시간(seconds)·지역·메모는 그대로 보인다. 본인 순찰은 정확한 시각을 본다.
+create or replace view public.patrols_feed as
+  select id, city, memo, checks, seconds,
+         case when owner = auth.uid() then started
+              else date_trunc('day', started at time zone 'Asia/Seoul') at time zone 'Asia/Seoul' end as started,
+         case when owner = auth.uid() then ended
+              else date_trunc('day', started at time zone 'Asia/Seoul') at time zone 'Asia/Seoul' end as ended,
+         (owner = auth.uid()) as is_own
+    from public.patrols;
+
+revoke all on public.patrols_feed from anon, authenticated;
+grant select on public.patrols_feed to authenticated;
+
 comment on view public.reports_feed is '모든 이용자에게 보이는 현장 기록. 작성자 번호는 공개하지 않는다.';
+comment on view public.patrols_feed is '모든 이용자에게 보이는 순찰일지. 작성자 번호는 공개하지 않고 다른 사람의 순찰은 날짜만 보인다.';
 comment on column public.reports.moderation_status is 'approved: 저장 즉시 모두에게 공개(기본값), rejected: 운영자가 내린 기록(작성자만 확인)';

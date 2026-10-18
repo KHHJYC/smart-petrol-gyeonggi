@@ -77,19 +77,24 @@ async function records(config: SharedConfig, input: RequestInfo | URL, init?: Re
   const method = (init?.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
   const session = await auth(config);
   if (method === 'GET') {
-    // reports_feed 는 작성자 번호(owner)를 내보내지 않고 is_own 만 계산해 준다.
+    // *_feed 뷰는 작성자 번호(owner)를 내보내지 않고 is_own 만 계산해 준다.
     // 작성자 번호가 공개되면 같은 사람의 기록끼리 묶여 산책 경로가 드러날 수 있다.
+    // 다른 사람의 순찰일지는 서버에서 시각을 날짜까지만 잘라 보낸다.
     const [reports, patrols] = await Promise.all([
       request(config, 'reports_feed?select=*&order=created.desc&limit=500'),
-      request(config, 'patrols?select=*&order=ended.desc&limit=500'),
+      request(config, 'patrols_feed?select=*&order=ended.desc&limit=500'),
     ]);
     const reportRows = (await reports.json()) as Array<Record<string, unknown>>;
+    const patrolRows = (await patrols.json()) as Array<Record<string, unknown>>;
     return json({
       reports: reportRows.map(({ owner: _owner, ...row }) => ({
         ...row,
         is_own: row.is_own === true,
       })),
-      patrols: await patrols.json(),
+      patrols: patrolRows.map(({ owner: _owner, ...row }) => ({
+        ...row,
+        is_own: row.is_own === true,
+      })),
       checkedAt: new Date().toISOString(),
       shared: true,
     });
