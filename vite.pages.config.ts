@@ -33,7 +33,8 @@ export default defineConfig({
       name: 'public-data-only',
       closeBundle() {
         const data = path.join(project, 'public/data');
-        const names = ['manifest.json', 'inspection.json', 'lighting-summary.json', 'briefing.json', ...fs.readdirSync(path.join(data, 'regions')).filter(n => n.endsWith('.json')).map(n => 'regions/' + n)];
+        // public/data 의 모든 JSON 을 압축한다. 목록을 손으로 적으면 새 파일(pet-cumulative.json)이 빠져 404 가 난다.
+        const names = [...fs.readdirSync(data).filter(n => n.endsWith('.json')), ...fs.readdirSync(path.join(data, 'regions')).filter(n => n.endsWith('.json')).map(n => 'regions/' + n)];
         for (const name of names) {
           const dest = path.join(output, 'data', name + '.gz');
           fs.mkdirSync(path.dirname(dest), { recursive: true });
