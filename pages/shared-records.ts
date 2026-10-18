@@ -32,9 +32,10 @@ function saveSession(value: Session) {
 async function auth(config: SharedConfig) {
   const saved = readSession();
   if (saved && saved.expires_at * 1000 > Date.now() + 60_000) return saved;
+  // 인증 요청에는 apikey 만 보낸다. 새 publishable 키(sb_publishable_…)는 JWT 가 아니라
+  // Authorization: Bearer 에 넣으면 거부될 수 있다. 예전 anon 키도 apikey 만으로 동작한다.
   const headers = {
     apikey: config.key,
-    Authorization: `Bearer ${config.key}`,
     'Content-Type': 'application/json',
   };
   if (saved?.refresh_token) {
@@ -76,15 +77,17 @@ async function records(config: SharedConfig, input: RequestInfo | URL, init?: Re
   const method = (init?.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
   const session = await auth(config);
   if (method === 'GET') {
+    // reports_feed 는 작성자 번호(owner)를 내보내지 않고 is_own 만 계산해 준다.
+    // 작성자 번호가 공개되면 같은 사람의 기록끼리 묶여 산책 경로가 드러날 수 있다.
     const [reports, patrols] = await Promise.all([
-      request(config, 'reports?select=*&order=created.desc&limit=500'),
+      request(config, 'reports_feed?select=*&order=created.desc&limit=500'),
       request(config, 'patrols?select=*&order=ended.desc&limit=500'),
     ]);
     const reportRows = (await reports.json()) as Array<Record<string, unknown>>;
     return json({
-      reports: reportRows.map(({ owner, ...row }) => ({
+      reports: reportRows.map(({ owner: _owner, ...row }) => ({
         ...row,
-        is_own: owner === session.user.id,
+        is_own: row.is_own === true,
       })),
       patrols: await patrols.json(),
       checkedAt: new Date().toISOString(),
@@ -112,9 +115,9 @@ async function records(config: SharedConfig, input: RequestInfo | URL, init?: Re
         lat: body.lat, lng: body.lng, observed_at: observed, status: '접수', evidence: '',
         radius: body.radius, cctv: Number.isInteger(body.cctv) ? body.cctv : null,
         lights: Number.isInteger(body.lights) ? body.lights : null, source_at: text(body.sourceAt, 50),
-        moderation_status: 'pending', created: now, updated: now }),
+        moderation_status: 'approved', created: now, updated: now }),
     });
-    return json({ id, moderation: 'pending' }, 201);
+    return json({ id, moderation: 'approved' }, 201);
   }
   if (method === 'POST' && body.kind === 'patrol') {
     const started = text(body.started, 35), ended = text(body.ended, 35), memo = text(body.memo, 1600);
