@@ -31,8 +31,9 @@ test('records stay on device and require evidence for a status change',async()=>
   assert.equal(e.requests.length,0);assert.ok(e.storage.has('test-records'));
 });
 test('deployed public data matches the validated source without losing any regions',()=>{
-  const names=['manifest.json','inspection.json','briefing.json','lighting-summary.json',...fs.readdirSync('public/data/regions').filter(n=>n.endsWith('.json')).map(n=>'regions/'+n)];
+  const names=[...fs.readdirSync('public/data').filter(n=>n.endsWith('.json')),...fs.readdirSync('public/data/regions').filter(n=>n.endsWith('.json')).map(n=>'regions/'+n)];
   for(const name of names)assert.deepEqual(gunzipSync(fs.readFileSync('site-static/data/'+name+'.gz')),fs.readFileSync('public/data/'+name));
+  assert.ok(names.includes('pet-cumulative.json'));
   const html=fs.readFileSync('site-static/index.html','utf8');
   assert.ok(html.includes('/smart-petrol-gyeonggi/assets/'));
   assert.ok(html.includes('이 브라우저에 저장'));

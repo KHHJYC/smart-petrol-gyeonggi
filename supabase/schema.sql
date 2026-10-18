@@ -8,8 +8,8 @@
 -- 한 사람의 산책 경로가 모이면 사는 곳을 짐작할 수 있기 때문이다.
 -- 대신 각 기록에 '내가 쓴 글인지(is_own)'만 붙여 준다.
 --
--- 운영: 문제가 있는 기록은 표 편집기에서 moderation_status 를 'rejected' 로 바꾸면
--- 작성자 본인 외에는 보이지 않는다.
+-- 운영: 문제가 있는 현장 기록은 표 편집기에서 moderation_status 를 'rejected' 로,
+-- 순찰일지는 hidden 을 true 로 바꾸면 작성자 본인 외에는 보이지 않는다.
 --
 -- 이 파일은 여러 번 실행해도 된다.
 
@@ -37,6 +37,8 @@ create table if not exists public.patrols (
   city text not null, memo text not null, checks jsonb not null default '[]', started timestamptz not null,
   ended timestamptz not null, seconds integer not null check (seconds between 0 and 86400)
 );
+-- 운영자가 내린 순찰일지. 지우지 않고 공개 목록에서만 뺀다.
+alter table public.patrols add column if not exists hidden boolean not null default false;
 create index if not exists reports_public_map_idx on public.reports (moderation_status, created desc);
 create index if not exists patrols_owner_idx on public.patrols (owner, ended desc);
 
@@ -92,7 +94,8 @@ create or replace view public.patrols_feed as
          case when owner = auth.uid() then ended
               else date_trunc('day', started at time zone 'Asia/Seoul') at time zone 'Asia/Seoul' end as ended,
          (owner = auth.uid()) as is_own
-    from public.patrols;
+    from public.patrols
+   where not hidden or owner = auth.uid();
 
 revoke all on public.patrols_feed from anon, authenticated;
 grant select on public.patrols_feed to authenticated;
@@ -100,3 +103,4 @@ grant select on public.patrols_feed to authenticated;
 comment on view public.reports_feed is '모든 이용자에게 보이는 현장 기록. 작성자 번호는 공개하지 않는다.';
 comment on view public.patrols_feed is '모든 이용자에게 보이는 순찰일지. 작성자 번호는 공개하지 않고 다른 사람의 순찰은 날짜만 보인다.';
 comment on column public.reports.moderation_status is 'approved: 저장 즉시 모두에게 공개(기본값), rejected: 운영자가 내린 기록(작성자만 확인)';
+comment on column public.patrols.hidden is 'true: 운영자가 내린 순찰일지(작성자만 확인). 기본값 false 는 모두에게 공개';
